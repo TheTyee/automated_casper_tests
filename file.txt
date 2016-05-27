@@ -1,0 +1,2 @@
+
+<img src="http://thetyee.ca/ui/img/form_txt_searchthetyee.png" width="85" height="10" alt="Search the Tyee:">
