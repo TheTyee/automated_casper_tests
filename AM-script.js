@@ -1,38 +1,38 @@
 
-var pageUrls = ['http://thetyee.ca/', 'http://thetyee.ca/News/', 'http://thetyee.ca/Culture/', 'http://thetyee.ca/Opinion/', 'http://thetyee.ca/National/', 'http://thetyee.ca/Mediacheck/', 'http://thetyee.ca/Solutions/', 'http://thetyee.ca/Polls/', 'http://thetyee.ca/Presents/'];
+var address = 'http://thetyee.ca';
 
 var casper = require('casper').create({
 	verbose: false,
 	logLevel: 'debug'
 });
 
+
+
 //Fire up the browser
-casper.start('http://thetyee.ca').then(function() { 
+casper.start(address, function(){
+
+}).then(function() { 
 	this.echo('initial snapshot');
 	this.capture('images/first.png');
+
 });
 
 //include fs so we can write the results to a file.
 var fs=require('fs');
 
-//TESTING START
 
-/* check for phantom user agent
 casper.then(function(){
-
-	//don't wrap this in an evaluate function because it's not in page scope, it's in script scope
-	this.echo(window.navigator.userAgent);
+	//check if the page has the support popup
+	if (this.exists('div#modalSupport.modal.fade.support-modal.in')){
+		//If it does, close it
+		casper.waitForSelector('div#modalSupport.modal.fade.support-modal.in', function() {
+	   		this.click('a.builder.link');
+   			this.echo('popup closed');
+		});
+	} else {
+		this.echo('No modal present');
+	}
 });
-*/
-
-//Shuts the popup so we can manipulate the page
-casper.waitForSelector('div#modalSupport.modal.fade.support-modal.in', function() {
-   	this.click('a.builder.link');
-   	this.echo('popup closed');
-});
-
-
-
 
 
 casper.then(function(){
@@ -45,6 +45,26 @@ casper.then(function(){
 });
 
 
+//Next, check if the headlines have updated since yesterday
+casper.then(function(){
+ 	var details = new Array();
+ 	var listDetails;
+	currentDate = new Date();
+
+	details.push(currentDate);
+	details.push(address);
+
+    listDetails = JSON.stringify(details);
+    this.echo(listDetails);
+	fs.write('returned_data/AM-details.json', listDetails, 'w');
+
+    
+ 
+});  //end list headlines
+
+
+
+
 	//Next, check if the headlines have updated since yesterday
 	casper.then(function(){
 	    listItems = this.evaluate(function () {
@@ -54,8 +74,14 @@ casper.then(function(){
 	            return  '\n' + node.textContent;
 	        });
 	    });
+
+
+	    listItems = JSON.stringify(listItems);
 	    this.echo(listItems);
-	    fs.write('returned_data/AM-headlines.json', JSON.stringify(listItems), 'a');
+		fs.write('returned_data/AM-headlines.json', listItems, 'w');
+	
+	    
+	 
 	});  //end list headlines
 
 
@@ -73,16 +99,13 @@ casper.then(function(){
 				});
 			});
 		this.echo(listImages);
-	    fs.write('returned_data/AM-images.json', JSON.stringify(listImages), 'a');
+		
+			fs.write('returned_data/AM-images.json', JSON.stringify(listImages), 'w');
+		
 	});
 
 	//put all images into an array, write it to json
 	//based on the day of the week, if PM headlines != AM headlines, there should be no problem
-
-
-
-
-
 
 
 

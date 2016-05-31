@@ -1,51 +1,25 @@
+var address = 'http://thetyee.ca';
 
-var pageUrls = ['http://thetyee.ca/'];
 
 var casper = require('casper').create({
 	verbose: false,
 	logLevel: 'debug'
 });
 
+
+
 //Fire up the browser
-casper.start('http://thetyee.ca', function(){
-
-
+casper.start(address, function(){
 
 }).then(function() { 
 	this.echo('initial snapshot');
 	this.capture('images/first.png');
-
-
-
-
 
 });
 
 //include fs so we can write the results to a file.
 var fs=require('fs');
 
-
-//TESTING START
-
-/* check for phantom user agent
-casper.then(function(){
-
-	//don't wrap this in an evaluate function because it's not in page scope, it's in script scope
-	this.echo(window.navigator.userAgent);
-});
-*/
-
-//Shuts the popup so we can manipulate the page
-
-/*
-casper.wait(3000, function(){
-	var elem = document.getElementsByClassName('support-modal');
-	var visibility = window.getComputedStyle(elem[0], null).getPropertyValue("display");
-	if (visibility != 'block')
-
-});
-
-*/
 
 casper.then(function(){
 	//check if the page has the support popup
@@ -58,11 +32,7 @@ casper.then(function(){
 	} else {
 		this.echo('No modal present');
 	}
-
-
 });
-
-
 
 
 casper.then(function(){
@@ -75,6 +45,20 @@ casper.then(function(){
 });
 
 
+//Next, check if the headlines have updated since yesterday
+casper.then(function(){
+ 	var details = new Array();
+ 	var listDetails;
+	currentDate = new Date();
+
+	details.push(currentDate);
+	details.push(address);
+
+    listDetails = JSON.stringify(details);
+    this.echo(listDetails);
+	fs.write('returned_data/PM-details.json', listDetails, 'w');
+});  //end list headlines
+
 	//Next, check if the headlines have updated since yesterday
 	casper.then(function(){
 	    listItems = this.evaluate(function () {
@@ -84,9 +68,14 @@ casper.then(function(){
 	            return  '\n' + node.textContent;
 	        });
 	    });
-	    this.echo(this.getCurrentUrl());
+
+
+	    listItems = JSON.stringify(listItems);
 	    this.echo(listItems);
-	    fs.write('returned_data/PM-headlines.json', JSON.stringify(listItems), 'a');
+		fs.write('returned_data/PM-headlines.json', listItems, 'w');
+	
+	    
+	 
 	});  //end list headlines
 
 
@@ -104,7 +93,9 @@ casper.then(function(){
 				});
 			});
 		this.echo(listImages);
-		fs.write('returned_data/PM-images.json', JSON.stringify(listImages), 'a');
+		
+			fs.write('returned_data/PM-images.json', JSON.stringify(listImages), 'w');
+		
 	});
 
 	//put all images into an array, write it to json
