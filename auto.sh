@@ -1,5 +1,5 @@
 #!/bin/bash
-# Find Phantom and Casper
+# Find Phantom and Casper - this is
 PHANTOMJS_EXECUTABLE=/Applications/MAMP/htdocs/automated_casper_tests/node_modules/phantomjs-prebuilt/bin/phantomjs /Applications/MAMP/htdocs/automated_casper_tests/node_modules/casperjs/bin/casperjs
 # Determine if current time is AM or PM
 TIMEOFDAY='$(date +"%p")'

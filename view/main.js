@@ -8,9 +8,6 @@ function amLastrun(){
 
 amLastrun();
 
-
-
-
 function pmLastrun(){
 	$.getJSON("returned_data/home/PM-details.json", function(data){
 
@@ -19,9 +16,6 @@ function pmLastrun(){
 };
 
 pmLastrun();
-
-
-
 
 function amHeadlines(){
 	$.getJSON("returned_data/home/AM-headlines.json", function(data){
@@ -36,7 +30,6 @@ function amHeadlines(){
 }
 amHeadlines();
 
-
 function pmHeadlines(){
 	$.getJSON("returned_data/home/PM-headlines.json", function(data){
 
@@ -49,7 +42,7 @@ function pmHeadlines(){
 	}
 	pmHeadlines();
 
-
+/* Eventually, this will compare the json files to show a diff
 	function headlineComparison(){
 		// if am and pm headlines are the same
 		//echo 'Looks like there weren't any story updates
@@ -60,20 +53,20 @@ function pmHeadlines(){
 		$('#status').append("This would be the status that shows if there's a diff.");
 
 	}
-	headlineComparison();
+	headlineComparison();*/
 
-	function showContent(){
-		var clickableArea = $('.header-wrap'); 
-		$(clickableArea).each(function(index){
-			console.log($(this));
-			$(this).click(function(){
+function showContent(){
+	var clickableArea = $('.header-wrap'); 
+	$(clickableArea).each(function(index){
+		console.log($(this));
+		$(this).click(function(){
 
-				$(this).next().toggleClass('show');
-			});
-			
-
+			$(this).next().toggleClass('show');
 		});
-	}
+		
 
-	showContent();
+	});
+}
+
+showContent();
 		
