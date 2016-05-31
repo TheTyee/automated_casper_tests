@@ -4,7 +4,7 @@ PHANTOMJS_EXECUTABLE=/Applications/MAMP/htdocs/automated_casper_tests/node_modul
 # Determine if current time is AM or PM
 TIMEOFDAY='$(date +"%p")'
 # Go to the directory where the casper script lives
-cd /Applications/MAMP/htdocs/automated_casper_tests/
+cd /Applications/MAMP/htdocs/automated_casper_tests/casper_scripts/
 
 # If it's evening, run the PM script; else run AM script
 if [ TIMEOFDAY = 'am' ]

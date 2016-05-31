@@ -1,11 +1,13 @@
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="view/style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	</head>
 	<body>
-
-		<h1 id="current-url"></h1>
+		<div class="header-wrap">
+			<h1 class="header-left" id="current-url"></h1>
+			<h2 class="header-right" id="status"></h2>
+		</div>
 
 		<table>
 			<tbody>
@@ -21,7 +23,7 @@
 				<tr>
 					<td class="am-images">
 						<p><small>Click to see full size version</small></p>
-						<a target="_blank" href="images/captured-AM.png"><img width="100" src="images/captured-AM.png"/></a>
+						<a target="_blank" href="returned_data/home/images/captured-AM.png"><img width="100" src="returned_data/home/images/captured-AM.png"/></a>
 					</td>
 					<td class="am-headlines">
 						<ul>
@@ -30,7 +32,7 @@
 					</td>
 					<td class="pm-images">
 						<p><small>Click to see full size version</small></p>
-						<a target="_blank" href="images/captured-PM.png"><img width="100" src="images/captured-PM.png"/></a>
+						<a target="_blank" href="returned_data/home/images/captured-PM.png"><img width="100" src="returned_data/home/images/captured-PM.png"/></a>
 					</td>
 					<td class="pm-headlines">
 						<ul>
@@ -52,6 +54,8 @@
 			</tbody>
 		</table>
 
-<script src="main.js"></script>
+
+<script src="view/main.js"></script>
+
 	</body>
 </html>
