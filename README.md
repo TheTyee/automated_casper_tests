@@ -13,11 +13,11 @@ PhantomJS
 ##To dos##
 Egad. A lot.
 
-[ ] Compare AM-headlines.json and PM-headlines.json to create a simple diff
-[ ] Handle the diff in the UI for ease of use and scannability by dynamically generating a status - if there is a diff, that means the site updated overnight. If there isn't, it did not. Ideally updates would be green and non-updates orange.
-[ ] Use Casper to loop through all section pages, including polls and Tyee Presents and return data.
-[ ] Add functionality that checks for 404 or 500 internal links
-[ ] Clean up the hacky code
+- [ ] Compare AM-headlines.json and PM-headlines.json to create a simple diff
+- [ ] Handle the diff in the UI for ease of use and scannability by dynamically generating a status - if there is a diff, that means the site updated overnight. If there isn't, it did not. Ideally updates would be green and non-updates orange.
+- [ ] Use Casper to loop through all section pages, including polls and Tyee Presents and return data.
+- [ ] Add functionality that checks for 404 or 500 internal links
+- [ ] Clean up the hacky code
 
 
 ##Gotchas##
